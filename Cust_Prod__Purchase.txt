@@ -1,0 +1,461 @@
+create table purchase(order_no varchar(10)not null primary key,cust_no varchar(15)not null,prod_no varchar(15)not null,quantity int not null,orderdate date,foreign key(cust_no)references customer(cust_no),foreign key(prod_no)references product(product_no));
+
+Table created.
+
+SQL> desc purchase;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                  NOT NULL VARCHAR2(10)
+ CUST_NO                                   NOT NULL VARCHAR2(15)
+ PROD_NO                                   NOT NULL VARCHAR2(15)
+ QUATITY                                   NOT NULL NUMBER(38)
+ ORDERDATE                                          DATE
+
+create table product(product_no varchar(15)not null primary key,description varchar(15)not null,company varchar(15)not null,price int not null);
+
+Table created.
+
+SQL> desc product;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRODUCT_NO                                NOT NULL VARCHAR2(15)
+ DESCRIPTION                               NOT NULL VARCHAR2(15)
+ COMPANY                                   NOT NULL VARCHAR2(15)
+ PRICE                                     NOT NULL NUMBER(38)
+
+create table customer(cust_no varchar(15)not null primary key,name varchar(15)not null,age int not null,city varchar(15)not null,pincode int not null,state varchar(15)not null);
+
+Table created.
+
+SQL> desc customer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_NO                                   NOT NULL VARCHAR2(15)
+ NAME                                      NOT NULL VARCHAR2(15)
+ CITY                                      NOT NULL VARCHAR2(15)
+ PINCODE                                   NOT NULL NUMBER(38)
+ STATE                                     NOT NULL VARCHAR2(15)
+
+create table suppliers(s_no varchar(15)not null primary key,sname varchar(15)not null,age int not null,city varchar(15)not null);
+
+Table created.
+
+SQL> desc suppliers;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ S_NO                                      NOT NULL VARCHAR2(15)
+ SNAME                                     NOT NULL VARCHAR2(15)
+ AGE                                       NOT NULL NUMBER(38)
+ CITY                                      NOT NULL VARCHAR2(15)
+
+INSERTION:
+
+insert into product values('P00001','12W Flood light','Wipro',5000);
+insert into product values('P00002','Laptop Adapter','Dell',1560);
+insert into product values('P00003','Tablet','HCL',11000);
+insert into product values('P00004','Garnet 50W Led','Wipro',999);
+insert into product values('P00005','Laptop charger','HCL',1690);
+
+SQL> select *from product;
+
+PRODUCT_NO      DESCRIPTION     COMPANY              PRICE
+--------------- --------------- --------------- ----------
+P00001          12W Flood light Wipro                 5000
+P00002          Laptop Adapter  Dell                  1560
+P00003          Tablet          HCL                  11000
+P00004          Garnet 50W Led  Wipro                  999
+P00005          Laptop charger  HCL                   1690
+
+
+insert into customer values('C00001','Ivan Bayross',35,'Bombay',400054,'Maharashtra');
+insert into customer values('C00002','Vandana Saitwal',35,'Madras',780001,'Tamil Nadu') ;
+insert into customer values('C00003','Pramada Jaguste',55,'Bombay',400057,'Maharashtra') ;
+insert into customer values('C00004','Basu Navindagi',45,'Bombay',400056,'Maharashtra') ;
+insert into customer values('C00005','Ravi Sreedharan',25,'Delhi',10001,'Delhi') ;
+insert into customer values('C00006','Rukmini',25,'Madras',780001,'Tamil Nadu');
+
+SQL> select *from customer;
+
+CUST_NO         NAME                   AGE CITY               PINCODE
+--------------- --------------- ---------- --------------- ----------
+STATE
+---------------
+C00001          Ivan Bayross            35 Bombay              400054
+Maharashtra
+
+C00002          Vandana Saitwal         35 Madras              780001
+Tamil Nadu
+
+C00003          Pramada Jaguste         55 Bombay              400057
+Maharashtra
+
+
+CUST_NO         NAME                   AGE CITY               PINCODE
+--------------- --------------- ---------- --------------- ----------
+STATE
+---------------
+C00004          Basu Navindagi          45 Bombay              400056
+Maharashtra
+
+C00005          Ravi Sreedharan         25 Delhi                10001
+Delhi
+
+C00006          Rukmini                 25 Madras              780001
+Tamil Nadu
+
+
+6 rows selected.
+
+insert into suppliers values('S001','Ivan Bayross',35,'Bombay');
+insert into suppliers values('S002','Nirmala Agarwal',35,'Madras');
+insert into suppliers values('C003','Susmitha',55,'Bombay');
+insert into suppliers values('C004','Basu Navindagi',45,'Bombay');
+insert into suppliers values('C005','Ravi Sreedharan',25,'Delhi');
+insert into suppliers values('C006','Nanda Gopal',25,'Madras');
+
+
+SQL> SELECT *FROM suppliers;
+
+S_NO            SNAME                  AGE CITY
+--------------- --------------- ---------- ---------------
+S001            Ivan Bayross            35 Bombay
+S002            Nirmala Agarwal         35 Madras
+C003            Susmitha                55 Bombay
+C004            Basu Navindagi          45 Bombay
+C005            Ravi Sreedharan         25 Delhi
+C006            Nanda Gopal             25 Madras
+
+6 rows selected.
+
+insert into purchase values('O00001','C00002','P00003',2,'20-JAN-16');
+insert into purchase values('O00002','C00003','P00002',1,'27-JAN-16');
+insert into purchase values('O00003','C00006','P00001',3,'20-FEB-16');
+insert into purchase values('O00004','C00003','P00005',4,'07-APR-16');
+insert into purchase values('O00005','C00004','P00002',2,'22-MAY-16');
+insert into purchase values('O00006','C00005','P00004',1,'26-MAY-16');
+
+SQL> select *from purchase;
+ORDER_NO   CUST_NO         PROD_NO           QUANTITY ORDERDATE
+---------- --------------- --------------- ---------- ---------
+O00001     C00002          P00003                   2 20-JAN-16
+O00002     C00003          P00002                   1 27-JAN-16
+O00003     C00006          P00001                   3 20-FEB-16
+O00004     C00003          P00005                   4 07-APR-16
+O00005     C00004          P00002                   2 22-MAY-16
+O00006     C00005          P00004                   1 26-MAY-16
+
+6 rows selected.
+
+Questions:
+1.SQL> Select Name from CUSTOMER where city='Madras';
+
+NAME
+---------------
+Vandana Saitwal
+Rukmini
+
+2.SQL> select cust_no from purchase where orderdate LIKE '___JAN___';
+
+CUST_NO
+---------------
+C00003
+C00002
+
+3.SQL> select company from product where price>5000;
+
+COMPANY
+---------------
+HCL
+
+4.SQL> select name from customer where name not like'R%';
+
+NAME
+---------------
+Ivan Bayross
+Vandana Saitwal
+Pramada Jaguste
+Basu Navindagi
+
+5.SQL> alter table customer add email varchar(50);
+
+Table altered.
+
+SQL> desc customer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUST_NO                                   NOT NULL VARCHAR2(15)
+ NAME                                      NOT NULL VARCHAR2(15)
+ AGE                                       NOT NULL NUMBER(38)
+ CITY                                      NOT NULL VARCHAR2(15)
+ PINCODE                                   NOT NULL NUMBER(38)
+ STATE                                     NOT NULL VARCHAR2(15)
+ EMAIL                
+
+6.SQL> select name from customer where age>40 and state='Maharashtra';
+
+NAME
+---------------
+Pramada Jaguste
+Basu Navindagi
+
+7.SQL> select company,price from product ORDER BY price;
+
+COMPANY              PRICE
+--------------- ----------
+Wipro                  999
+Dell                  1560
+HCL                   1690
+Wipro                 5000
+HCL                  11000
+
+8.SQL> select AVG(age)from customer;
+
+  AVG(AGE)
+----------
+36.6666667
+
+9.SQL> select city,state from customer where state in ('Maharashtra','Tam
+il Nadu');
+
+CITY            STATE
+--------------- ---------------
+Bombay          Maharashtra
+Madras          Tamil Nadu
+Bombay          Maharashtra
+Bombay          Maharashtra
+Madras         
+
+10.SQL> select avg(price) from product;
+
+AVG(PRICE)
+----------
+    4049.8
+
+11.SQL> select cust_no,quatity from purchase order by quatity;
+
+CUST_NO            QUATITY
+--------------- ----------
+C00003                   1
+C00005                   1
+C00002                   2
+C00004                   2
+C00006                   3
+C00003                   4
+
+6 rows selected.
+
+12. insert into product values('P00008','Laptop Camera','HP',6000);
+
+1 row created.
+
+SQL>  update purchase set prod_no='P00008' where cust_no='C00003';
+
+2 rows updated.
+SQL> select *from purchase;
+
+ORDER_NO   CUST_NO         PROD_NO           QUANTITY ORDERDATE
+---------- --------------- --------------- ---------- ---------
+O00001     C00002          P00003                   2 20-JAN-16
+O00002     C00003          P00008                   1 27-JAN-16
+O00003     C00006          P00001                   3 20-FEB-16
+O00004     C00003          P00008                   4 07-APR-16
+O00005     C00004          P00002                   2 22-MAY-16
+O00006     C00005          P00004                   1 26-MAY-16
+
+6 rows selected.
+
+13.SQL> select count(*) from customer where city='Delhi';
+
+  COUNT(*)
+----------  
+         1
+
+14.SQL> select cust_no from purchase where quantity>3;
+
+CUST_NO
+---------------
+C00003
+
+15.SQL> delete from purchase;
+
+6 rows deleted.
+
+SQL> desc purchase;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                  NOT NULL VARCHAR2(10)
+ CUST_NO                                   NOT NULL VARCHAR2(15)
+ PROD_NO                                   NOT NULL VARCHAR2(15)
+ QUANTITY                                  NOT NULL NUMBER(38)
+ ORDERDATE                                          DATE
+
+SQL> alter table purchase modify orderdate varchar(15);
+
+Table altered.
+
+SQL> desc purchase;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDER_NO                                  NOT NULL VARCHAR2(10)
+ CUST_NO                                   NOT NULL VARCHAR2(15)
+ PROD_NO                                   NOT NULL VARCHAR2(15)
+ QUANTITY                                  NOT NULL NUMBER(38)
+ ORDERDATE                                          VARCHAR2(15)
+
+
+16.SQL> select min(price),max(price) from product;
+
+MIN(PRICE) MAX(PRICE)
+---------- ----------
+       999      11000
+
+17.SQL> select company,count(*) from product where company in('Wipro','HCL')group by company;
+
+COMPANY           COUNT(*)
+--------------- ----------
+Wipro                    2
+HCL                      2
+
+
+18.SQL> select name from customer order by name;
+
+NAME
+---------------
+Basu Navindagi
+Ivan Bayross
+Pramada Jaguste
+Ravi Sreedharan
+Rukmini
+Vandana Saitwal
+
+6 rows selected.
+
+
+19.SQL> select *from purchase order by orderdate desc;
+
+ORDER_NO   CUST_NO         PROD_NO           QUANTITY ORDERDATE
+---------- --------------- --------------- ---------- ---------------
+O00002     C00003          P00002                   1 27-JAN-16
+O00006     C00005          P00004                   1 26-MAY-16
+O00005     C00004          P00002                   2 22-MAY-16
+O00001     C00002          P00003                   2 20-JAN-16
+O00003     C00006          P00001                   3 20-FEB-16
+O00004     C00003          P00005                   4 07-APR-16
+
+6 rows selected.
+
+20.SQL> delete from purchase where prod_no='P00003';
+
+1 row deleted.
+
+SQL> delete from product where product_no='P00003';
+
+1 row deleted.
+
+SQL> select*from product;
+
+PRODUCT_NO      DESCRIPTION     COMPANY              PRICE
+--------------- --------------- --------------- ----------
+P00001          12W Flood light Wipro                 5000
+P00002          Laptop Adapter  Dell                  1560
+P00004          Garnet 50W Led  Wipro                  999
+P00005          Laptop charger  HCL                   1690
+P00008          Laptop Camera   HP                    6000
+
+21.SQL> create table new_table as select order_no,orderdate from purchase;
+
+Table created.
+
+SQL> select*from new_table;
+
+ORDER_NO   ORDERDATE
+---------- ---------------
+O00002     27-JAN-16
+O00003     20-FEB-16
+O00004     07-APR-16
+O00005     22-MAY-16
+O00006     26-MAY-16
+
+
+22.SQL> drop table new_table;
+
+Table dropped.
+
+
+23.SQL> create view customer_view as select*from customer;
+
+View created.
+
+SQL> select *from customer_view;
+
+CUST_NO         NAME                   AGE CITY               PINCODE
+--------------- --------------- ---------- --------------- ----------
+STATE           EMAIL
+--------------- --------------------------------------------------
+C00001          Ivan Bayross            35 Bombay              400054
+Maharashtra
+
+C00002          Vandana Saitwal         35 Madras              780001
+Tamil Nadu
+
+C00003          Pramada Jaguste         55 Bombay              400057
+Maharashtra
+
+
+CUST_NO         NAME                   AGE CITY               PINCODE
+--------------- --------------- ---------- --------------- ----------
+STATE           EMAIL
+--------------- --------------------------------------------------
+C00004          Basu Navindagi          45 Bombay              400056
+Maharashtra
+
+C00005          Ravi Sreedharan         25 Delhi                10001
+Delhi
+
+C00006          Rukmini                 25 Madras              780001
+Tamil Nadu
+
+
+6 rows selected.
+
+
+24.SQL> select P.cust_no,count(P.cust_no),C.name from purchase P,customer c where P.cust_no=C.cust_no group by P.cust_no,name having count(P.cust_no)>1;
+
+CUST_NO         COUNT(P.CUST_NO) NAME
+--------------- ---------------- ---------------
+C00003                         2 Pramada Jaguste
+
+
+25.SQL> select c.city,c.name,p.order_no,p.cust_no from purchase p join customer c on p.cust_no=c.cust_no order by c.city;
+
+CITY            NAME            ORDER_NO   CUST_NO
+--------------- --------------- ---------- ---------------
+Bombay          Pramada Jaguste O00002     C00003
+Bombay          Pramada Jaguste O00004     C00003
+Bombay          Basu Navindagi  O00005     C00004
+Delhi           Ravi Sreedharan O00006     C00005
+Madras          Rukmini         O00003     C00006
+
+
+26.SQL> select name from customer where name like'R%';
+
+NAME
+---------------
+Ravi Sreedharan
+Rukmini
+
+27.SQL> select name from customer  union select sname from suppliers;
+
+NAME
+---------------
+Ivan Bayross
+Vandana Saitwal
+Pramada Jaguste
+Basu Navindagi
+Ravi Sreedharan
+Rukmini
+Nirmala Agarwal
+Susmitha
+Nanda Gopal
+
+9 rows selected.
