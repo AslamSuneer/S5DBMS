@@ -1,0 +1,345 @@
+create table customer(custid int primary key,custname varchar(20),city varchar(20),amount int ,discount int,salesmanid varchar(20));
+
+Table created.
+
+SQL> desc customer4;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CUSTID                                    NOT NULL NUMBER(38)
+ CUSTNAME                                           VARCHAR2(20)
+ CITY                                               VARCHAR2(20)
+ AMOUNT                                             NUMBER(38)
+ DISCOUNT                                           NUMBER(38)
+ SALESMANID                                         VARCHAR2(20)
+
+INSERTION:
+insert into customer4 values(100,'deepa','trivandrum',1050,2,'K0010');
+insert into customer4 values(101,'don','trivandrum',8040,4,'K0010');
+insert into customer4 values(102,'manacy','kollam',20030,6,'A200tmp');
+insert into customer4 values(103,'karthika','ernakulam',8400,20,'EkmX1050');
+insert into customer4 values(104,'tulasi','ernakulam',2500,2,'EkmY2342');
+insert into customer4 values(105,'roy','trivandrum',2400,4,'L1045');
+insert into customer4 values(106,'vivek','trivandrum',3200,8,'L1045');
+insert into customer4 values(108,'bhasi','kottayam',12860,10,'KtmP1028');
+insert into customer4 values(109,'anurag','kottayam',3860,12,'KtmB158tmp');
+insert into customer4 values(110,'antony','kottayam',9800,8,'KtmP1028');
+insert into customer4 values(111,'meera','trichur',6700,6,'R3085');
+
+SQL> select *from customer4;
+
+    CUSTID CUSTNAME             CITY                     AMOUNT   DISCOUNT
+---------- -------------------- -------------------- ---------- ----------
+SALESMANID
+--------------------
+       100 deepa                trivandrum                 1050          2
+K0010
+
+       101 don                  trivandrum                 8040          4
+K0010
+
+       102 manacy               kollam                    20030          6
+A200tmp
+
+
+    CUSTID CUSTNAME             CITY                     AMOUNT   DISCOUNT
+---------- -------------------- -------------------- ---------- ----------
+SALESMANID
+--------------------
+       103 karthika             ernakulam                  8400         20
+EkmX1050
+
+       104 tulasi               ernakulam                  2500          2
+EkmY2342
+
+       105 roy                  trivandrum                 2400          4
+L1045
+
+
+    CUSTID CUSTNAME             CITY                     AMOUNT   DISCOUNT
+---------- -------------------- -------------------- ---------- ----------
+SALESMANID
+--------------------
+       106 vivek                trivandrum                 3200          8
+L1045
+
+       108 bhasi                kottayam                  12860         10
+KtmP1028
+
+       109 anurag               kottayam                   3860         12
+KtmB158tmp
+
+
+    CUSTID CUSTNAME             CITY                     AMOUNT   DISCOUNT
+---------- -------------------- -------------------- ---------- ----------
+SALESMANID
+--------------------
+       110 antony               kottayam                   9800          8
+KtmP1028
+
+       111 meera                trichur                    6700          6
+R3085
+
+
+11 rows selected.
+
+
+QUESTIONS:
+1.SQL> select *from customer4 where LOWER(SUBSTR(custname,1,1))='a';
+
+    CUSTID CUSTNAME             CITY                     AMOUNT   DISCOUNT
+---------- -------------------- -------------------- ---------- ----------
+SALESMANID
+--------------------
+       109 anurag               kottayam                   3860         12
+KtmB158tmp
+
+       110 antony               kottayam                   9800          8
+KtmP1028
+
+2.SQL>  select *from customer4 where UPPER(SUBSTR(custname,1,1))='A';
+
+    CUSTID CUSTNAME             CITY                     AMOUNT   DISCOUNT
+---------- -------------------- -------------------- ---------- ----------
+SALESMANID
+--------------------
+       109 anurag               kottayam                   3860         12
+KtmB158tmp
+
+       110 antony               kottayam                   9800          8
+KtmP1028
+
+
+3.SQL> update customer4 set custname=initcap(custname);
+
+11 rows updated.
+
+SQL> select *from customer4;
+
+    CUSTID CUSTNAME             CITY                     AMOUNT   DISCOUNT
+---------- -------------------- -------------------- ---------- ----------
+SALESMANID
+--------------------
+       100 Deepa                trivandrum                 1050          2
+K0010
+
+       101 Don                  trivandrum                 8040          4
+K0010
+
+       102 Manacy               kollam                    20030          6
+A200tmp
+
+
+    CUSTID CUSTNAME             CITY                     AMOUNT   DISCOUNT
+---------- -------------------- -------------------- ---------- ----------
+SALESMANID
+--------------------
+       103 Karthika             ernakulam                  8400         20
+EkmX1050
+
+       104 Tulasi               ernakulam                  2500          2
+EkmY2342
+
+       105 Roy                  trivandrum                 2400          4
+L1045
+
+
+    CUSTID CUSTNAME             CITY                     AMOUNT   DISCOUNT
+---------- -------------------- -------------------- ---------- ----------
+SALESMANID
+--------------------
+       106 Vivek                trivandrum                 3200          8
+L1045
+
+       108 Bhasi                kottayam                  12860         10
+KtmP1028
+
+       109 Anurag               kottayam                   3860         12
+KtmB158tmp
+
+
+    CUSTID CUSTNAME             CITY                     AMOUNT   DISCOUNT
+---------- -------------------- -------------------- ---------- ----------
+SALESMANID
+--------------------
+       110 Antony               kottayam                   9800          8
+KtmP1028
+
+       111 Meera                trichur                    6700          6
+R3085
+
+
+11 rows selected.
+
+
+4.
+SQL> select *from customer4 where lower(substr(city,-1))='a';
+
+no rows selected
+
+5.SQL> select substr(salesmanid,0,3)from customer4;
+
+SUBSTR(SALES
+------------
+K00
+K00
+A20
+Ekm
+Ekm
+L10
+L10
+Ktm
+Ktm
+Ktm
+R30
+
+11 rows selected.
+
+
+6.SQL> select salesmanid from customer4 where instr(salesmanid,'tmp')>0;
+
+SALESMANID
+--------------------
+A200tmp
+KtmB158tmp
+
+7.SQL> select count(*)from customer4 where upper(substr(city,1,1))='T';
+
+  COUNT(*)
+----------
+         5
+
+8.SQL> select *from customer4 where upper(substr(custname,1,1))='D' and length(custname)>=4;
+
+    CUSTID CUSTNAME             CITY                     AMOUNT   DISCOUNT
+---------- -------------------- -------------------- ---------- ----------
+SALESMANID
+--------------------
+       100 Deepa                trivandrum                 1050          2
+K0010
+
+
+9.SQL> select city from customer4 where upper(substr(city,1,1))='K' and length(city)>=2;
+
+CITY
+--------------------
+kollam
+kottayam
+kottayam
+kottayam
+
+
+10.SQL> select city from customer4 where upper(substr(city,1,1))='K' and length(city)>=7;
+
+CITY
+--------------------
+kottayam
+kottayam
+kottayam
+
+
+11.SQL> select city from customer4 where upper(substr(city,1,1))='K' and upper(substr(city,-1))='M';
+
+CITY
+--------------------
+kollam
+kottayam
+kottayam
+kottayam
+
+12.SQL> select salesmanid,concat(sum(discount),'%')as totaldiscount,concat(max(discount),'%')as maximumdiscount from customer4 group by salesmanid;
+
+SALESMANID           TOTALDISCOUNT
+-------------------- -----------------------------------------
+MAXIMUMDISCOUNT
+-----------------------------------------
+K0010                6%
+4%
+
+A200tmp              6%
+6%
+
+EkmX1050             20%
+20%
+
+
+SALESMANID           TOTALDISCOUNT
+-------------------- -----------------------------------------
+MAXIMUMDISCOUNT
+-----------------------------------------
+EkmY2342             2%
+2%
+
+L1045                12%
+8%
+
+KtmP1028             18%
+10%
+
+
+SALESMANID           TOTALDISCOUNT
+-------------------- -----------------------------------------
+MAXIMUMDISCOUNT
+-----------------------------------------
+KtmB158tmp           12%
+12%
+
+R3085                6%
+6%
+
+
+8 rows selected.
+
+13.SQL> select upper(city)as CITY from customer4;
+
+CITY
+--------------------
+TRIVANDRUM
+TRIVANDRUM
+KOLLAM
+ERNAKULAM
+ERNAKULAM
+TRIVANDRUM
+TRIVANDRUM
+KOTTAYAM
+KOTTAYAM
+KOTTAYAM
+TRICHUR
+
+11 rows selected.
+
+14.SQL> update customer4 set salesmanid=replace(salesmanid,'Ekm','')where instr(salesmanid,'Ekm')>0;
+
+2 rows updated.
+
+SQL> select salesmanid from customer4;
+
+SALESMANID
+--------------------
+K0010
+K0010
+A200tmp
+X1050
+Y2342
+L1045
+L1045
+KtmP1028
+KtmB158tmp
+KtmP1028
+R3085
+
+11 rows selected.
+
+15.SQL> select salesmanid,sum(amount),to_char(sysdate,'dd-month-yyyy')as todaysdate from customer4 group by salesmanid;
+
+SALESMANID           SUM(AMOUNT) TODAYSDATE
+-------------------- ----------- --------------------------------------------
+K0010                       9090 02-august   -2024
+A200tmp                    20030 02-august   -2024
+X1050                       8400 02-august   -2024
+Y2342                       2500 02-august   -2024
+L1045                       5600 02-august   -2024
+KtmP1028                   22660 02-august   -2024
+KtmB158tmp                  3860 02-august   -2024
+R3085                       6700 02-august   -2024
+
+8 rows selected.
